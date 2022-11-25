@@ -59,7 +59,7 @@ namespace BossAntiSoftlock
         {
             Chat.SendBroadcastChat(new Chat.SimpleChatMessage
             {
-                baseToken = $"<color=#93c47d>{ModName}:</color> {message}"
+                baseToken = $"<color=#93c47d>系统：</color> {message}"
             });
         }
 
@@ -101,14 +101,14 @@ namespace BossAntiSoftlock
                 case "/br":
                 case "/rb":
                     List<CharacterMaster> characters = Instance.GetEligibleBossCharacters();
-                    SendModChat($"Resetting boss positions... ({characters.Count} boss{(characters.Count == 1 ? "" : "es")})");
+                    SendModChat($"重置了...({characters.Count}个头目的位置)");
                     try
                     {
                         ResetCharactersPositions(characters);
                     } catch (Exception e)
                     {
                         Debug.LogException(e);
-                        SendModChat("Error resetting boss positions; check console for more info!");
+                        SendModChat("重置头目位置发生错误！");
                     }
                     break;
             }
@@ -116,7 +116,7 @@ namespace BossAntiSoftlock
 
         private void SendModHint(TeleporterInteraction obj)
         {
-            SendModChat("Type '/bossreset' to reset boss positions.");
+            SendModChat("如果头目位置异常可使用'/br'重置。");
         }
 
         private void TrackNewBoss(On.RoR2.Run.orig_OnServerBossAdded orig, Run self, BossGroup bossGroup, CharacterMaster characterMaster)
